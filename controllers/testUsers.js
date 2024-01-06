@@ -6,7 +6,5 @@ module.exports = {
 };
 
 async function testGetUser(req, res) {
-        res.json({
-          "hello World",
-        });
-      }
+    res.json("Hello World");
+  }
