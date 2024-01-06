@@ -8,6 +8,6 @@ var router = express.Router();
 
 /* base path: /test */ 
 
-router.get('/index', controllerTestUsers.testGetUser); 
+router.get('/', controllerTestUsers.testGetUser); 
 
 module.exports = router;
