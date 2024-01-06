@@ -7,6 +7,6 @@ module.exports = {
 
 async function testGetUser(req, res) {
         res.json({
-          test: await modelTestUsers.testGetUser(req.query),
+          "hello World",
         });
       }
