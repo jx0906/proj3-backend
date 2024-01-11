@@ -1,4 +1,4 @@
-const daoBooking = require("../daos/booking");
+const daoBooking = require("../daos/bookings");
 
 module.exports = {
   getAllByUserId,
@@ -10,11 +10,13 @@ module.exports = {
 };
 
 function getAllByUserId(id) {
-  return daoBooking.find({ user: id });
+  // return daoBooking.find({ user: id });
+  return daoBooking.find({});
 }
 
 function getAllByRestaurantId(id) {
-  return daoBooking.find({ restaurant: id });
+  // return daoBooking.find({ restaurant: id });
+  return daoBooking.find({});
 }
 
 function getOneById(id) {

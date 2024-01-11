@@ -1,5 +1,5 @@
-const modelBooking = require("../models/booking");
-const modelRestaurant = require("../models/restaurant");
+const modelBooking = require("../models/bookings");
+// const modelRestaurant = require("../models/restaurants");
 
 module.exports = {
   getAllByUserId,
@@ -14,7 +14,8 @@ module.exports = {
 // @route   GET /bookings/
 // @access  Private
 async function getAllByUserId(req, res) {
-  const bookings = await modelBooking.getAllByUserId(req.user._id);
+  // const bookings = await modelBooking.getAllByUserId(req.user._id);
+  const bookings = await modelBooking.getAllByUserId();
   res.json(bookings);
 }
 
@@ -22,22 +23,23 @@ async function getAllByUserId(req, res) {
 // @route   GET /bookings/restaurant/:id
 // @access  Private
 async function getAllByRestaurantId(req, res) {
-  const restaurant = await modelRestaurant.getOneById(req.params.id);
-  if (!restaurant) return res.status(404).json("no restaurant with such id");
-  if (restaurant.user != req.user._id)
-    return res.status(401).json("Unauthorized");
+  // const restaurant = await modelRestaurant.getOneById(req.params.id);
+  // if (!restaurant) return res.status(404).json("no restaurant with such id");
+  // if (restaurant.user != req.user._id)
+  // return res.status(401).json("Unauthorized");
 
-  const bookings = await modelBooking.getAllByRestaurantId(req.params.id);
+  // const bookings = await modelBooking.getAllByRestaurantId(req.params.id);
+  const bookings = await modelBooking.getAllByRestaurantId();
 
   res.json(bookings);
 }
 
-// @desc    Get one booking
+// @desc    Get one booking by ID
 // @route   GET /bookings/:id
 // @access  Private
 async function getOneById(req, res) {
   const booking = await modelBooking.getOneById(req.params.id);
-  const restaurant = await modelRestaurant.getOneById(booking.restaurant);
+  // const restaurant = await modelRestaurant.getOneById(booking.restaurant);
 
   if (booking == "no restaurant with such id") {
     res.status(404).json("no restaurant with such id");
@@ -61,16 +63,15 @@ async function getOneById(req, res) {
 // @route   POST /bookings/create/:restaurantId
 // @access  Private
 async function createBooking(req, res) {
-  const restaurantId = req.params.restaurantId;
-
-  const restaurant = await modelRestaurant.getOneById(restaurantId);
-  const user = req.user._id;
+  // const restaurantId = req.params.restaurantId;
+  // const restaurant = await modelRestaurant.getOneById(restaurantId);
+  // const user = req.user._id;
 
   try {
     const booking = await modelBooking.createBooking({
       ...req.body,
-      user,
-      restaurant,
+      // user,
+      // restaurant,
     });
     res.status(201).json(booking);
   } catch (err) {
@@ -78,14 +79,15 @@ async function createBooking(req, res) {
   }
 }
 
-// @desc    Update a booking
+// @desc    Update a booking by ID
 // @route   PUT /bookings/:id/edit
 // @access  Private
 async function updateBooking(req, res) {
   const bookingByParams = await modelBooking.getOneById(req.params.id);
-  if (bookingByParams.user != req.user._id) {
-    return res.status(401).json("Unauthorized");
-  }
+  // Check if the user who made the booking matches the token user
+  // if (bookingByParams.user != req.user._id) {
+  //   return res.status(401).json("Unauthorized");
+  // }
 
   try {
     const booking = await modelBooking.updateBooking(req.params.id, req.body);
@@ -95,14 +97,15 @@ async function updateBooking(req, res) {
   }
 }
 
-// @desc    Delete a booking
+// @desc    Delete a booking by ID
 // @route   DELETE /bookings/:id/delete
 // @access  Private
 async function deleteBooking(req, res) {
-  const bookingByParams = await modelBooking.getOneById(req.params.id);
-  if (bookingByParams.user != req.user._id) {
-    return res.status(401).json("Unauthorized");
-  }
+  // Check if the user who made the booking matches the token user
+  // const bookingByParams = await modelBooking.getOneById(req.params.id);
+  // if (bookingByParams.user != req.user._id) {
+  // return res.status(401).json("Unauthorized");
+  // }
 
   try {
     const booking = await modelBooking.deleteBooking(req.params.id);

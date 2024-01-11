@@ -3,18 +3,18 @@ const Schema = mongoose.Schema;
 
 const bookingSchema = new Schema(
   {
-    restaurant: {
-      type: Schema.Types.ObjectId,
-      ref: "Restaurant",
-    },
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
+    // restaurant: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "Restaurant",
+    // },
+    // user: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "User",
+    // },
     pax: {
       type: Number,
       required: true,
-      max: 100,
+      max: 10,
     },
     dateTime: {
       type: Date,
