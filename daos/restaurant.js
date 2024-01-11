@@ -2,8 +2,12 @@ const mongoose = require("mongoose");
 // optional shortcut to the mongoose.Schema class
 const Schema = mongoose.Schema;
 
+// import related daos (to facilitate retrieval of idUser in schemaUser and idBooking in schemaBooking)
+const daoUser = require('./user');
+const daoBooking = require('./booking');
+
 /*{
-    "_id": "658ac33fcfe93c8dbf44gb99",
+    "idRest": "658ac33fcfe93c8dbf44gb99",
     "imageRest":
     "name":"testsample",
     "category": “Japanese”,
@@ -22,7 +26,7 @@ const Schema = mongoose.Schema;
 const schemaRestaurant = new Schema({
     idRest: {
         type: mongoose.ObjectIds, // a special Mongoose data type that is for storing unique identities
-    }
+    },
     nameRest: {
         type: String,
         required: true
@@ -44,18 +48,43 @@ const schemaRestaurant = new Schema({
       },
     timeOpen: {
         type: Date, 
-        /* using string to facilitate input validation. also no need to use Data type as we are not performing any
+        /* to consider using string to facilitate input validation. also no need to use Data type as we are not performing any
         date-related operations (eg, calculating opening duration) */
-        
     },
-    maxPax: {
+    timeClose: {
+      type: Date,
+  },
+  daysClose: {
+    type: Date,
+  },
+  address: {
+    type: String,
+},
+  phone: {
+    type: Number,
+},
+  websiteUrl: {
+    type: String,
+},
+  maxPax: {
         type: Number,
         required: true,
         min: 1,
-      },
-    descriptionRest: {
+},
+  descriptionRest: {
         type: String,
-    },
+},
+    // by refactoring as type: [ObjectID] ref: XXXX 
+  // we will be able to inform the populate() method which dao/model's documents
+  // (containing the schema) to use to replace the ObjectIds with  
+//   idBooking: {
+  //     type: mongoose.Schema.Types.ObjectId,
+  // ref: daoBooking,
+  // },
+//   idUser: {
+//     type: mongoose.Schema.Types.ObjectId,
+//                 ref: daoUser,
+// },
   }, {
     // For mongoose to automatically create createdAt and updatedAt fields to every document
     timestamps: true

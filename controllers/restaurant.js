@@ -1,10 +1,28 @@
+const modelRestaurant = require("../models/restaurant")
+
 module.exports = {
-    getListings
+    getAllRestaurants,
+    // getRestaurant,
+    // createRestaurant,
+    // editRestaurant,
+    // deleteRestaurant,
 };
 
-async function getListings(req, res) {
+async function getAllRestaurants(req, res) {
         res.json({
-          movies: await modelRestaurants.getAll(req.query),
+          restaurants: await modelRestaurant.getAll(req.query),
         });
-        // next();  error handling/redirect to another endpoint/auditing log purpose
-      }
+      };
+
+async function retrieveListing(req,res){
+const books = await schemaRestaurant.find().populate('users');
+        console.log(books);
+}
+
+ // in movies controller show function
+ async function show(req, res) {
+  // Populate the cast array with performer docs instead of ObjectIds
+  // ie instead of ObjectIDs, populate the performer documents in the cast array
+  const movie = await Movie.findById(req.params.id).populate('cast');
+  res.json({ title: 'Movie Detail', movie })
+}
