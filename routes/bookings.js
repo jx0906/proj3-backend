@@ -19,7 +19,9 @@ router.get("/:id", bookingsController.getOneById);
 
 // @route   POST /bookings/create/:restaurantId
 // @access  Private (bearer token passed in header)
-router.post("/create/:restaurantId", bookingsController.createBooking);
+// router.post("/create/:restaurantId", bookingsController.createBooking);
+// temporary
+router.post("/create/", bookingsController.createBooking);
 
 // @desc    Update a booking
 // @route   PUT /bookings/:id/edit
