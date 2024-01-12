@@ -2,11 +2,29 @@ var express = require('express');
 var router = express.Router();
 
 // import controllers
-var controllerTestUsers = require('../controllers/testUsers')
+var restaurantController = require("../controllers/restaurants")
 
-/* base path: /test */ 
-/* GET restaurant listing. 
-input: -
-output: restaurant info */
+// @desc    Get all restaurants
+// @route   GET /restaurants/
+// @access  Public
+router.get("/", restaurantController.getAllRestaurants);
 
-router.get('/', controllerTestUsers.testGetUser); 
+// @desc    Get restaurants(by rest id)
+// @route   GET /restaurants/listings
+// @access  Public
+router.get('/:restId', restaurantController.getRestaurant);
+
+// @desc    Create restaurants
+// @route   POST /restaurants/create
+// @access  Public
+router.post('/create', restaurantController.createRestaurant);
+
+// @desc    Edit restaurant
+// @route   POST /restaurants/:restId/edit
+// @access  Private (bearer token passed in header)
+router.post('/:restId/edit', restaurantController.editRestaurant);
+
+// @desc    Edit restaurant
+// @route   POST /restaurants/:restId/edit
+// @access  Private (bearer token passed in header)
+router.delete('/:restId/delete', restaurantController.deleteRestaurant);
