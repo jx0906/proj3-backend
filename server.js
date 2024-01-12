@@ -1,4 +1,4 @@
-var createError = require("http-errors");
+// var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
@@ -25,6 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 // mount routers
+app.use("/", indexRouter);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/restaurants", restaurantRouter);

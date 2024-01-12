@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // import related daos (to facilitate retrieval of idUser in schemaUser and idBooking in schemaBooking)
-const daoUser = require('./user');
-const daoBooking = require('./booking');
+const daoUser = require("./user");
+const daoBooking = require("./booking");
 
 /*{
     "idRest": "658ac33fcfe93c8dbf44gb99",
@@ -23,72 +23,72 @@ const daoBooking = require('./booking');
     "restDest":"mid-tier jap restaurant in midtown",
     } */
 
-const schemaRestaurant = new Schema({
-    idRest: {
-        type: mongoose.ObjectIds, // a special Mongoose data type that is for storing unique identities
+const schemaRestaurant = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
     },
-    nameRest: {
-        type: String,
-        required: true
-      },
-    imageRest: {
-        // need this to be URL to facilitate FE rendering
-        type: String,
-        required: false
-      },
+    image: {
+      // need this to be URL to facilitate FE rendering
+      type: String,
+      required: false,
+    },
     category: {
-        type: String,
-        enum: ["Asian", "Chinese", "Japanese", "Western"],
-        required: true
-      },
+      type: String,
+      enum: ["Asian", "Chinese", "Japanese", "Western"],
+      required: true,
+    },
     location: {
-        type: string,
-        enum: ["North", "South","East", "West", "Central"],
-        required: true,
-      },
+      type: String,
+      enum: ["North", "South", "East", "West", "Central"],
+      required: true,
+    },
     timeOpen: {
-        type: Date, 
-        /* to consider using string to facilitate input validation. also no need to use Data type as we are not performing any
+      type: Number,
+      /* to consider using string to facilitate input validation. also no need to use Data type as we are not performing any
         date-related operations (eg, calculating opening duration) */
     },
     timeClose: {
-      type: Date,
+      type: Number,
+    },
+    daysClose: {
+      type: [Date],
+    },
+    address: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    websiteUrl: {
+      type: String,
+    },
+    maxPax: {
+      type: Number,
+      required: true,
+      min: 1,
+    },
+    description: {
+      type: String,
+    },
+    // by refactoring as type: [ObjectID] ref: XXXX
+    // we will be able to inform the populate() method which dao/model's documents
+    // (containing the schema) to use to replace the ObjectIds with
+    //   idBooking: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    // ref: daoBooking,
+    // },
+    //   idUser: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //                 ref: daoUser,
+    // },
   },
-  daysClose: {
-    type: Date,
-  },
-  address: {
-    type: String,
-},
-  phone: {
-    type: Number,
-},
-  websiteUrl: {
-    type: String,
-},
-  maxPax: {
-        type: Number,
-        required: true,
-        min: 1,
-},
-  descriptionRest: {
-        type: String,
-},
-    // by refactoring as type: [ObjectID] ref: XXXX 
-  // we will be able to inform the populate() method which dao/model's documents
-  // (containing the schema) to use to replace the ObjectIds with  
-//   idBooking: {
-  //     type: mongoose.Schema.Types.ObjectId,
-  // ref: daoBooking,
-  // },
-//   idUser: {
-//     type: mongoose.Schema.Types.ObjectId,
-//                 ref: daoUser,
-// },
-  }, {
+  {
     // For mongoose to automatically create createdAt and updatedAt fields to every document
-    timestamps: true
-  });
-  
+    timestamps: true,
+  }
+);
+
 // Compile schema into model and export it
 module.exports = mongoose.model("Restaurant", schemaRestaurant);
