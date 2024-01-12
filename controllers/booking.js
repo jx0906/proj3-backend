@@ -1,4 +1,4 @@
-const modelBooking = require("../models/bookings");
+const modelBooking = require("../models/booking");
 // const modelRestaurant = require("../models/restaurants");
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
 };
 
 // @desc    Get all bookings(by user id)
-// @route   GET /bookings/
+// @route   GET /booking/
 // @access  Private
 async function getAllByUserId(req, res) {
   // const bookings = await modelBooking.getAllByUserId(req.user._id);
@@ -20,7 +20,7 @@ async function getAllByUserId(req, res) {
 }
 
 // @desc    Get all bookings (by restaurant id)
-// @route   GET /bookings/restaurant/:id
+// @route   GET /booking/restaurant/:id
 // @access  Private
 async function getAllByRestaurantId(req, res) {
   // const restaurant = await modelRestaurant.getOneById(req.params.id);
@@ -35,7 +35,7 @@ async function getAllByRestaurantId(req, res) {
 }
 
 // @desc    Get one booking by ID
-// @route   GET /bookings/:id
+// @route   GET /booking/:id
 // @access  Private
 async function getOneById(req, res) {
   const booking = await modelBooking.getOneById(req.params.id);
@@ -60,7 +60,7 @@ async function getOneById(req, res) {
 }
 
 // @desc    Create a booking
-// @route   POST /bookings/create/:restaurantId
+// @route   POST /booking/create/:restaurantId
 // @access  Private
 async function createBooking(req, res) {
   // const restaurantId = req.params.restaurantId;
@@ -80,7 +80,7 @@ async function createBooking(req, res) {
 }
 
 // @desc    Update a booking by ID
-// @route   PUT /bookings/:id/edit
+// @route   PUT /booking/:id/edit
 // @access  Private
 async function updateBooking(req, res) {
   const bookingByParams = await modelBooking.getOneById(req.params.id);
@@ -98,7 +98,7 @@ async function updateBooking(req, res) {
 }
 
 // @desc    Delete a booking by ID
-// @route   DELETE /bookings/:id/delete
+// @route   DELETE /booking/:id/delete
 // @access  Private
 async function deleteBooking(req, res) {
   // Check if the user who made the booking matches the token user

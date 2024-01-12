@@ -1,4 +1,4 @@
-const daoBooking = require("../daos/bookings");
+const daoBooking = require("../daos/booking");
 
 module.exports = {
   getAllByUserId,

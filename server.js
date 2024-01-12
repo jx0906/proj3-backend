@@ -9,7 +9,8 @@ var cors = require("cors");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var bookingsRouter = require("./routes/bookings");
+var bookingsRouter = require("./routes/booking");
+var restaurantsRouter = require("./routes/restaurant");
 var testRouter = require("./routes/test");
 require("dotenv").config();
 require("./config/backend");
@@ -27,8 +28,8 @@ app.use(cors());
 // mount routers
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-
-app.use("/bookings", bookingsRouter);
+app.use("/booking", bookingsRouter);
+app.use("/restaurant", restaurantsRouter);
 app.use("/test", testRouter);
 
 // catch 404 and forward to error handler
