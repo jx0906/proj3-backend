@@ -2,7 +2,7 @@ const restaurantModel = require("../models/restaurant");
 
 module.exports = {
   getAllRestaurants,
-  getRestaurant,
+  // getRestaurant,
   createRestaurant,
   editRestaurant,
   deleteRestaurant,
@@ -17,21 +17,25 @@ async function getAllRestaurants(req, res) {
   }
 } // output from test: {"restaurants":[]}
 
-async function getRestaurant(req, res) {
-  const data = await restaurantModel.getRestaurantById(req.params.id);
-  if (data == "no restaurant found") {
-    res.json("no data found");
-  } else {
-    res.json(data);
-  }
-}
+// async function getRestaurant(req, res) {
+//   const data = await restaurantModel.getRestaurantById(req.params.id);
+//   if (data == "no restaurant found") {
+//     res.json("no data found");
+//   } else {
+//     res.json(data);
+//   }
+// }
 
 async function createRestaurant(req, res) {
-  const data = await restaurantModel.createRestaurant(req.body);
-  res.json(data);
-  // Always redirect after CUD data
-  // To refactor to redirect to the restaurant listing we implement it
-  // res.redirect('/restaurant/:restId');
+  try {
+    const data = await restaurantModel.createRestaurant(req.body);
+    res.json(data);
+    // Always redirect after CUD data
+    // To refactor to redirect to the restaurant listing we implement it
+    // res.redirect('/restaurant/:restId');
+  } catch (err) {
+    res.status(500).json({ errorMsg: err.message });
+  }
 }
 
 async function editRestaurant(req, res) {

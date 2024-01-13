@@ -12,7 +12,7 @@ router.get("/", restaurantController.getAllRestaurants);
 // @desc    Get restaurants(by rest id)
 // @route   GET /restaurants/:restID
 // @access  Public
-router.get("/:restId", restaurantController.getRestaurant);
+// router.get("/:restId", restaurantController.getRestaurant);
 
 // @desc    Create restaurants
 // @route   POST /restaurants/create

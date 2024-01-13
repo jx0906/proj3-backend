@@ -47,6 +47,7 @@ async function getAllRestaurants(query) {
 //     }
 //   }
 
-function createRestaurant(restaurant) {
-  return daoRestaurant.create(restaurant);
+async function createRestaurant(input) {
+  const newRest = await daoRestaurant.create(input);
+  return newRest;
 }
