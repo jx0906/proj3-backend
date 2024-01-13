@@ -3,7 +3,7 @@ const daoRestaurant = require("../daos/restaurant");
 
 module.exports = {
   getAllRestaurants,
-  // getRestaurantById
+  getRestaurantById,
   createRestaurant,
   // editRestaurant,
   deleteRestaurant,
@@ -14,13 +14,18 @@ function getAllRestaurants(queryFields) {
   return daoRestaurant.find(queryFields);
 }
 
+async function getRestaurantById(param) {
+  const data = await daoRestaurant.findOne({ _id: param });
+  return data;
+}
+
 function createRestaurant(body) {
   return daoRestaurant.create(body);
 }
 
 async function deleteRestaurant(param) {
   const data = await daoRestaurant.findOne({ _id: param });
-  return daoRestaurant.delete(data);
+  return daoRestaurant.deleteOne(data);
 }
 
 /*

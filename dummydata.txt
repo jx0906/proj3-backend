@@ -1,3 +1,4 @@
 dummy restaurants:
-- ABC Nasi Lemak (_id: 65a256e7b1edcc09af565461)
-- testsample (_id:65a215b7860cf17450c159ca)
+> ABC Nasi Lemak (_id: 65a256e7b1edcc09af565461)
+> testsample (_id:65a215b7860cf17450c159ca) - already removed; retain to test return message for non-existing data
+> Royal Prata (_id:65a278d1f5ae0f9372509411)

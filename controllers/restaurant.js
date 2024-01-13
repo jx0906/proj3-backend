@@ -2,7 +2,7 @@ const modelRestaurant = require("../models/restaurant");
 
 module.exports = {
   getAllRestaurants,
-  // getRestaurant,
+  getRestaurant,
   createRestaurant,
   editRestaurant,
   deleteRestaurant,
@@ -18,14 +18,19 @@ async function getAllRestaurants(req, res) {
   }
 }
 
-// async function getRestaurant(req, res) {
-//   const data = await modelRestaurant.getRestaurantById(req.params.restId);
-//   if (data == "no restaurant found") {
-//     res.json("no data found");
-//   } else {
-//     res.json(data);
-//   }
-// }
+async function getRestaurant(req, res) {
+  const data = await modelRestaurant.getRestaurantById(req.params.restId);
+  try {
+    if (data == "null") {
+      res.json("no restaurant data found");
+    } else {
+      res.json(data);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ errorMsg: err.message });
+  }
+}
 
 async function createRestaurant(req, res) {
   try {
