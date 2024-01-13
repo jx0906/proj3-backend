@@ -6,12 +6,21 @@ module.exports = {
   // getRestaurantById
   createRestaurant,
   // editRestaurant,
-  // deleteRestaurant,
+  deleteRestaurant,
 };
 
 //basic function
 function getAllRestaurants(queryFields) {
   return daoRestaurant.find(queryFields);
+}
+
+function createRestaurant(body) {
+  return daoRestaurant.create(body);
+}
+
+async function deleteRestaurant(param) {
+  const data = await daoRestaurant.findOne({ _id: param });
+  return daoRestaurant.delete(data);
 }
 
 /*
@@ -38,16 +47,14 @@ async function getAllRestaurants(query) {
 }
 */
 
-//   async function getRestaurantById(param) {
-//     const restaurant = await daoRestaurant.findOne({_id: param})
+/*   async function getRestaurantById(param) {
+//     const restaurant = await daoRestaurant.findOne({
+    email: body.email,
+    password: body.password,
+  })
 //     if (restaurant == null || Object.keys(restaurant).length == 0) {
 //         return "no restaurant with such id"
 //     } else {
 //         return restaurant
 //     }
-//   }
-
-async function createRestaurant(input) {
-  const newRest = await daoRestaurant.create(input);
-  return newRest;
-}
+*/
