@@ -9,13 +9,16 @@ module.exports = {
 };
 
 async function getAllRestaurants(req, res) {
-  res.json({
-    restaurants: await restaurantModel.getAll(req.query),
-  });
-}
+  try {
+    const data = await restaurantModel.getAllRestaurants(req.query);
+    res.json({ restaurants: data });
+  } catch (err) {
+    res.status(500).json({ errorMsg: err.message });
+  }
+} // output from test: {"restaurants":[]}
 
 async function getRestaurant(req, res) {
-  const data = await restaurantModel.findById(req.params.id);
+  const data = await restaurantModel.getRestaurantById(req.params.id);
   if (data == "no restaurant found") {
     res.json("no data found");
   } else {
@@ -39,7 +42,7 @@ async function editRestaurant(req, res) {
 }
 
 async function deleteRestaurant(req, res) {
-  await restaurantModel.deleteOne(req.params.id);
+  await restaurantModel.deleteRestaurant(req.params.id);
   res.json("data has been deleted.");
   // res.redirect('/');
 }

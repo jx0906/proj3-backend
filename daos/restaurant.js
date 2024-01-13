@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // import related daos (to facilitate retrieval of idUser in schemaUser and idBooking in schemaBooking)
-const daoUser = require("./user");
-const daoBooking = require("./booking");
+// const userDao = require("./user");
+// const bookingDao = require("./booking");
 
 /*{
     "idRest": "658ac33fcfe93c8dbf44gb99",
-    "imageRest":
+    "image": "testURL",
     "name":"testsample",
     "category": “Japanese”,
     "location": “East”,
@@ -19,11 +19,10 @@ const daoBooking = require("./booking");
     "phone":"88997788",
     "websiteUrl":"www.testestes.com",
     "maxPax":"30",
-    "idUser":"658ac33fcfe93c8dbf43fb28"
-    "restDest":"mid-tier jap restaurant in midtown",
+    "description":"mid-tier jap restaurant in midtown"
     } */
 
-const schemaRestaurant = new Schema(
+const restaurantSchema = new Schema(
   {
     name: {
       type: String,
@@ -77,11 +76,11 @@ const schemaRestaurant = new Schema(
     // (containing the schema) to use to replace the ObjectIds with
     //   idBooking: {
     //     type: mongoose.Schema.Types.ObjectId,
-    // ref: daoBooking,
+    // ref: bookingDao,
     // },
     //   idUser: {
     //     type: mongoose.Schema.Types.ObjectId,
-    //                 ref: daoUser,
+    //                 ref: userDao,
     // },
   },
   {
@@ -91,4 +90,4 @@ const schemaRestaurant = new Schema(
 );
 
 // Compile schema into model and export it
-module.exports = mongoose.model("Restaurant", schemaRestaurant);
+module.exports = mongoose.model("Restaurant", restaurantSchema);

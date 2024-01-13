@@ -26,7 +26,6 @@ app.use(cors());
 
 // mount routers
 app.use("/", indexRouter);
-app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/restaurants", restaurantRouter);
 
