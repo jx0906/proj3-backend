@@ -21,16 +21,16 @@ router.get("/:id", bookingsController.getOneById);
 // @access  Private (bearer token passed in header)
 // router.post("/create/:restaurantId", bookingsController.createBooking);
 // temporary
-router.post("/create/", bookingsController.createBooking);
+router.post("/create", bookingsController.createBooking);
 
 // @desc    Update a booking
 // @route   PUT /booking/:id/edit
 // @access  Private (bearer token passed in header)
-router.put("/:id/edit", bookingsController.updateBooking);
+router.post("/:id", bookingsController.updateBooking);
 
 // @desc    Delete a booking
 // @route   DELETE /booking/:id/delete
 // @access  Private (bearer token passed in header)
-router.delete("/:id/delete", bookingsController.deleteBooking);
+router.delete("/:id", bookingsController.deleteBooking);
 
 module.exports = router;

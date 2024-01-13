@@ -80,7 +80,7 @@ async function createBooking(req, res) {
 }
 
 // @desc    Update a booking by ID
-// @route   PUT /booking/:id/edit
+// @route   POST /booking/:id
 // @access  Private
 async function updateBooking(req, res) {
   const bookingByParams = await modelBooking.getOneById(req.params.id);
@@ -98,7 +98,7 @@ async function updateBooking(req, res) {
 }
 
 // @desc    Delete a booking by ID
-// @route   DELETE /booking/:id/delete
+// @route   DELETE /booking/:id
 // @access  Private
 async function deleteBooking(req, res) {
   // Check if the user who made the booking matches the token user

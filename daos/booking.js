@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 const bookingSchema = new Schema(
   {
-    // restaurant: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "Restaurant",
-    // },
+    restaurant: {
+      type: Schema.Types.ObjectId,
+      ref: "Restaurant",
+    },
     // user: {
     //   type: Schema.Types.ObjectId,
     //   ref: "User",
@@ -19,6 +19,9 @@ const bookingSchema = new Schema(
     dateTime: {
       type: Date,
       required: true,
+    },
+    request: {
+      type: String,
     },
   },
   {
