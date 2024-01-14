@@ -9,7 +9,9 @@ module.exports = {
   deleteRestaurant,
 };
 
-//basic function
+//basic function to get all restaurant info
+//to KIV - code in FE to enable filtering by specific params; update GET function to be a dynamic one
+//based on filter params from FE form submission
 function getAllRestaurants(query) {
   return daoRestaurant.find(query);
 }
@@ -57,16 +59,4 @@ async function getAllRestaurants(query) {
   const restaurants = await daoRestaurant.find(findQuery);
   return restaurants;
 }
-*/
-
-/*   async function getRestaurantById(param) {
-//     const restaurant = await daoRestaurant.findOne({
-    email: body.email,
-    password: body.password,
-  })
-//     if (restaurant == null || Object.keys(restaurant).length == 0) {
-//         return "no restaurant with such id"
-//     } else {
-//         return restaurant
-//     }
 */

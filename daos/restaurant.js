@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 // const userDao = require("./user");
 // const bookingDao = require("./booking");
 
-/* CREATE format
+/* Sample CREATE format
 {
     "image": "testURL", //to update - https://media.istockphoto.com/id/157440843/photo/traditional-japanese-restaurant.jpg?s=612x612&w=0&k=20&c=0-Qmluxn5MaccmJjPML5DquRrqgnIZVQEuf8c7RKp9c=
     "name":"testsample",
@@ -43,8 +43,8 @@ const restaurantSchema = new Schema(
     },
     timeOpen: {
       type: Number,
-      /* to consider using string to facilitate input validation. also no need to use Data type as we are not performing any
-        date-related operations (eg, calculating opening duration) */
+      /* to update type as Date later when util functions are up. keeping it
+      as number for now to faciltiate testing. same for timeClose and daysClose*/
     },
     timeClose: {
       type: Number,

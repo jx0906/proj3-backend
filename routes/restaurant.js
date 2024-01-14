@@ -16,17 +16,17 @@ router.get("/:restId", restaurantController.getRestaurant);
 
 // @desc    Create restaurants
 // @route   POST /restaurant/create
-// @access  Public
+// @access  Public but to retain user created info 
 router.post("/create", restaurantController.createRestaurant);
 
 // @desc    Edit restaurant
 // @route   POST /restaurant/:restId/edit
-// @access  Private (bearer token passed in header)
+// @access  Private (bearer token passed in header - to check if user is owner of restaurant)
 router.post("/:restId/edit", restaurantController.editRestaurant);
 
 // @desc    Edit restaurant
 // @route   POST /restaurant/:restId/edit
-// @access  Private (bearer token passed in header)
+// @access  Private (bearer token passed in header -  to check if user is owner of restaurant))
 router.delete("/:restId/delete", restaurantController.deleteRestaurant);
 
 module.exports = router;
