@@ -1,29 +1,26 @@
 const mongoose = require("mongoose");
-// optional shortcut to the mongoose.Schema class
 const Schema = mongoose.Schema;
 
 // import related daos (to facilitate retrieval of idUser in schemaUser and idBooking in schemaBooking)
-const daoUser = require("./user");
-const daoBooking = require("./booking");
+// const userDao = require("./user");
+// const bookingDao = require("./booking");
 
-/*{
-    "idRest": "658ac33fcfe93c8dbf44gb99",
-    "imageRest":
+/* Sample CREATE format
+{
+    "image": "testURL", //to update - https://media.istockphoto.com/id/157440843/photo/traditional-japanese-restaurant.jpg?s=612x612&w=0&k=20&c=0-Qmluxn5MaccmJjPML5DquRrqgnIZVQEuf8c7RKp9c=
     "name":"testsample",
-    "category": “Japanese”,
-    "location": “East”,
-    "timeOpen": "1100",
-    "timeClose": "2000",
-    "daysClose":"Thursday",
+    "category": "Japanese",
+    "location": "East",
+    "timeOpen": 1100,
+    "timeClose": 2000,
     "address":"59 Devon Road Singapore 777888",
     "phone":"88997788",
     "websiteUrl":"www.testestes.com",
-    "maxPax":"30",
-    "idUser":"658ac33fcfe93c8dbf43fb28"
-    "restDest":"mid-tier jap restaurant in midtown",
+    "maxPax":30,
+    "description":"mid-tier jap restaurant in midtown"
     } */
 
-const schemaRestaurant = new Schema(
+const restaurantSchema = new Schema(
   {
     name: {
       type: String,
@@ -46,14 +43,18 @@ const schemaRestaurant = new Schema(
     },
     timeOpen: {
       type: Number,
-      /* to consider using string to facilitate input validation. also no need to use Data type as we are not performing any
-        date-related operations (eg, calculating opening duration) */
+      /* to update type as Date later when util functions are up. keeping it
+      as number for now to faciltiate testing. same for timeClose and daysClose*/
     },
     timeClose: {
       type: Number,
     },
     daysClose: {
-      type: [Date],
+      type: [String], //use array to enable multiple values
+      enum: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      // type: [Date],
+      // using enum to facilitate testing as we will need more work on the validation rules (ie, distill day from
+      // date to validate if booking would be valid)
     },
     address: {
       type: String,
@@ -77,11 +78,11 @@ const schemaRestaurant = new Schema(
     // (containing the schema) to use to replace the ObjectIds with
     //   idBooking: {
     //     type: mongoose.Schema.Types.ObjectId,
-    // ref: daoBooking,
+    // ref: bookingDao,
     // },
     //   idUser: {
     //     type: mongoose.Schema.Types.ObjectId,
-    //                 ref: daoUser,
+    //                 ref: userDao,
     // },
   },
   {
@@ -91,4 +92,4 @@ const schemaRestaurant = new Schema(
 );
 
 // Compile schema into model and export it
-module.exports = mongoose.model("Restaurant", schemaRestaurant);
+module.exports = mongoose.model("Restaurant", restaurantSchema);

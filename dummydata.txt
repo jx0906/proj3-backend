@@ -1,0 +1,10 @@
+For testing purposes
+
+Dummy restaurant data
+> ABC Nasi Lemak (id: 65a256e7b1edcc09af565461)
+> testsample (id:65a215b7860cf17450c159ca) - already removed; retain to test return message for non-existing data
+> Royal Prata (id:65a278d1f5ae0f9372509411)
+> Hill Street Tai Hwa Pork Noodle (id:65a2a7a55662bde20513cf79)
+> Don Pies (id: 65a2a8a15662bde20513cf7b)
+Note:
+- all image, address and websiteURL info are real for FE rendering, if app
