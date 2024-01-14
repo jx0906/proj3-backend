@@ -5,13 +5,13 @@ module.exports = {
   getAllRestaurants,
   getRestaurantById,
   createRestaurant,
-  // editRestaurant,
+  editRestaurant,
   deleteRestaurant,
 };
 
 //basic function
-function getAllRestaurants(queryFields) {
-  return daoRestaurant.find(queryFields);
+function getAllRestaurants(query) {
+  return daoRestaurant.find(query);
 }
 
 async function getRestaurantById(param) {
@@ -21,6 +21,13 @@ async function getRestaurantById(param) {
 
 function createRestaurant(body) {
   return daoRestaurant.create(body);
+}
+
+async function editRestaurant(param, body) {
+  const data = await daoRestaurant.findOneAndUpdate({ _id: param }, body, {
+    new: true, // "true" returns the doc (ie, record) after update was applied. else, it returns e original doc by default
+  });
+  return data;
 }
 
 async function deleteRestaurant(param) {

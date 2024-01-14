@@ -19,8 +19,8 @@ async function getAllRestaurants(req, res) {
 }
 
 async function getRestaurant(req, res) {
-  const data = await modelRestaurant.getRestaurantById(req.params.restId);
   try {
+  const data = await modelRestaurant.getRestaurantById(req.params.restId);
     if (data == "null") {
       res.json("no restaurant data found");
     } else {
@@ -46,10 +46,14 @@ async function createRestaurant(req, res) {
 }
 
 async function editRestaurant(req, res) {
-  const data = await modelRestaurant.editRestaurant(req.body);
-  res.json(data);
-  // To refactor to redirect to the restaurant listing we implement it
-  // res.redirect('/restaurant/:restId');
+  try{
+    const data = await modelRestaurant.editRestaurant(req.params.restId, req.body);
+      res.json(data);
+    }
+ catch (err) {
+    console.error(err);
+    res.status(500).json({ errorMsg: err.message });
+  }
 }
 
 async function deleteRestaurant(req, res) {
