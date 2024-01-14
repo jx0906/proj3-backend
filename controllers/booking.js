@@ -20,17 +20,30 @@ async function getAllByUserId(req, res) {
 }
 
 // @desc    Get all bookings (by restaurant id)
-// @route   GET /booking/restaurant/:id
-// @access  Private
+// @route   GET /booking/restaurant?startDateTime=2024-02-01T00%3A00%3A00%2B08%3A00&endDateTime=2024-02-29T23%3A59%3A59%2B08%3A00
+// @access  Private (bearer token passed in header/ check if user is an owner of restaurant)
 async function getAllByRestaurantId(req, res) {
-  // const restaurant = await modelRestaurant.getOneById(req.params.id);
-  // if (!restaurant) return res.status(404).json("no restaurant with such id");
-  // if (restaurant.user != req.user._id)
-  // return res.status(401).json("Unauthorized");
+  // const restaurant = await modelRestaurant.getOneByUserId(req.user._id);
+  // if (!restaurant) return res.status(401).json("Unauthorized");
+  // const bookings = await modelBooking.getAllByRestaurantId(restaurant._id, {
+  //   startDateTime: req.query.startDateTime,
+  //   endDateTime: req.query.endDateTime,
+  // });
 
-  // const bookings = await modelBooking.getAllByRestaurantId(req.params.id);
-  const bookings = await modelBooking.getAllByRestaurantId();
+  if (req.query.startDateTime > req.query.endDateTime) {
+    return res
+      .status(400)
+      .json("startDateTime must be earlier than endDateTime");
+  }
+  if (!req.query.startDateTime && !req.query.endDateTime) {
+    const bookings = await modelBooking.getAllByRestaurantId();
+    return res.json(bookings);
+  }
 
+  const bookings = await modelBooking.filterAllByRestaurantId({
+    startDateTime: req.query.startDateTime,
+    endDateTime: req.query.endDateTime,
+  });
   res.json(bookings);
 }
 
@@ -39,39 +52,22 @@ async function getAllByRestaurantId(req, res) {
 // @access  Private
 async function getOneById(req, res) {
   const booking = await modelBooking.getOneById(req.params.id);
-  // const restaurant = await modelRestaurant.getOneById(booking.restaurant);
-
-  if (booking == "no restaurant with such id") {
-    res.status(404).json("no restaurant with such id");
-  }
-
-  //   success wehn the user who made the booking matches the token user, or the restaurant owner matches the token user
-  //   if (booking.user == req.user._id || restaurant.user == req.user._id) {
-  //     res.json({
-  //       booking,
-  //     });
-  //   } else {
-  //     res.status(401).json("Unauthorized");
-  //   }
-
-  res.json({
-    booking,
-  });
+  res.json(booking);
 }
 
-// @desc    Create a booking
-// @route   POST /booking/create/:restaurantId
-// @access  Private
+// @desc    Create a booking (Restaurant ID is passed in the body)
+// @route   POST /booking/create
+// @access  Private (bearer token passed in header)
 async function createBooking(req, res) {
-  // const restaurantId = req.params.restaurantId;
-  // const restaurant = await modelRestaurant.getOneById(restaurantId);
   // const user = req.user._id;
+  // check if the restaurant exists
+  // const restaurant = await modelRestaurant.getOneById(req.body.restaurant);
+  // if (!restaurant) return res.status(404).json("no restaurant with such id");
 
   try {
     const booking = await modelBooking.createBooking({
       ...req.body,
       // user,
-      // restaurant,
     });
     res.status(201).json(booking);
   } catch (err) {
