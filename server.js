@@ -8,10 +8,10 @@ var logger = require("morgan");
 var cors = require("cors");
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var bookingsRouter = require("./routes/booking");
-var restaurantsRouter = require("./routes/restaurant");
-var testRouter = require("./routes/test");
+var userRouter = require("./routes/user");
+var restaurantRouter = require("./routes/restaurant");
+var bookingRouter = require("./routes/booking");
+
 require("dotenv").config();
 require("./config/backend");
 
@@ -27,10 +27,9 @@ app.use(cors());
 
 // mount routers
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/booking", bookingsRouter);
-app.use("/restaurant", restaurantsRouter);
-app.use("/test", testRouter);
+app.use("/user", userRouter);
+app.use("/restaurant", restaurantRouter);
+app.use("/booking", bookingRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res) {

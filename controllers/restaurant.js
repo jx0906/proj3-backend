@@ -2,27 +2,67 @@ const modelRestaurant = require("../models/restaurant");
 
 module.exports = {
   getAllRestaurants,
-  // getRestaurant,
-  // createRestaurant,
-  // editRestaurant,
-  // deleteRestaurant,
+  getRestaurant,
+  createRestaurant,
+  editRestaurant,
+  deleteRestaurant,
 };
 
 async function getAllRestaurants(req, res) {
-  res.json({
-    restaurants: await modelRestaurant.getAllRestaurants(req.query),
-  });
+  try {
+    const data = await modelRestaurant.getAllRestaurants(req.query);
+    res.json({ restaurants: data });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ errorMsg: err.message });
+  }
 }
 
-async function retrieveListing(req, res) {
-  const books = await schemaRestaurant.find().populate("users");
-  console.log(books);
+async function getRestaurant(req, res) {
+  try {
+  const data = await modelRestaurant.getRestaurantById(req.params.restId);
+    if (data == "null") {
+      res.json("no restaurant data found");
+    } else {
+      res.json(data);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ errorMsg: err.message });
+  }
 }
 
-// in movies controller show function
-async function show(req, res) {
-  // Populate the cast array with performer docs instead of ObjectIds
-  // ie instead of ObjectIDs, populate the performer documents in the cast array
-  const movie = await Movie.findById(req.params.id).populate("cast");
-  res.json({ title: "Movie Detail", movie });
+async function createRestaurant(req, res) {
+  try {
+    const data = await modelRestaurant.createRestaurant(req.body);
+    res.json(data);
+    // Always redirect after CUD data
+    // To refactor to redirect to the restaurant listing we implement it
+    // res.redirect('/restaurant/:restId');
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ errorMsg: err.message });
+  }
+}
+
+async function editRestaurant(req, res) {
+  try{
+    const data = await modelRestaurant.editRestaurant(req.params.restId, req.body);
+      res.json(data);
+    }
+ catch (err) {
+    console.error(err);
+    res.status(500).json({ errorMsg: err.message });
+  }
+}
+
+async function deleteRestaurant(req, res) {
+  try {
+    await modelRestaurant.deleteRestaurant(req.params.restId);
+    res.json("data has been deleted.");
+    // res.redirect('/');
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ errorMsg: err.message });
+  }
 }
