@@ -10,8 +10,8 @@ module.exports = {
 };
 
 function getAllByUserId(id) {
-  // return daoBooking.find({ user: id });
-  return daoBooking.find({});
+  // return daoBooking.find({ user: id }).populate("restaurant");
+  return daoBooking.find({}).populate("restaurant");
 }
 
 function getAllByRestaurantId(id) {
@@ -20,7 +20,7 @@ function getAllByRestaurantId(id) {
 }
 
 function getOneById(id) {
-  return daoBooking.findById(id);
+  return daoBooking.findById(id).populate("restaurant");
 }
 
 function createBooking(booking) {

@@ -17,20 +17,18 @@ router.get("/restaurant/:id", bookingController.getAllByRestaurantId);
 // @access  Private (bearer token passed in header)
 router.get("/:id", bookingController.getOneById);
 
-// @route   POST /booking/create/:restaurantId
+// @route   POST /booking/create
 // @access  Private (bearer token passed in header)
-// router.post("/create/:restaurantId", bookingsController.createBooking);
-// temporary
 router.post("/create/", bookingController.createBooking);
 
 // @desc    Update a booking
-// @route   PUT /booking/:id/edit
+// @route   POST /booking/:id
 // @access  Private (bearer token passed in header)
-router.put("/:id/edit", bookingController.updateBooking);
+router.put("/:id", bookingController.updateBooking);
 
 // @desc    Delete a booking
-// @route   DELETE /booking/:id/delete
+// @route   DELETE /booking/:id
 // @access  Private (bearer token passed in header)
-router.delete("/:id/delete", bookingController.deleteBooking);
+router.delete("/:id", bookingController.deleteBooking);
 
 module.exports = router;
