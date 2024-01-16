@@ -1,10 +1,23 @@
 For testing purposes
+Note: all image, address and websiteURL info are real for FE rendering, if app
 
-Dummy restaurant data
-> ABC Nasi Lemak (id: 65a256e7b1edcc09af565461)
-> testsample (id:65a215b7860cf17450c159ca) - already removed; retain to test return message for non-existing data
-> Royal Prata (id:65a278d1f5ae0f9372509411)
-> Hill Street Tai Hwa Pork Noodle (id:65a2a7a55662bde20513cf79)
-> Don Pies (id: 65a2a8a15662bde20513cf7b)
-Note:
-- all image, address and websiteURL info are real for FE rendering, if app
+Dummy restaurant data (id in parenthesis)
+> ABC Nasi Lemak (65a256e7b1edcc09af565461)
+> Royal Prata (65a278d1f5ae0f9372509411)
+> Hill Street Tai Hwa Pork Noodle (65a2a7a55662bde20513cf79)
+> Don Pies (65a2a8a15662bde20513cf7b)
+> Orchid Delights (65a408250cec62ba969e4585)
+> Tonkatsu King (65a5f564b1cb74aeb1cbd7ac)
+> Zen Sushi (65a60296a37b675e7235694b)
+> Asian Fusion (65a6029fa37b675e7235694d)
+> Bistro Europa (65a602bba37b675e7235694f)
+> Garden Bistro (65a602cda37b675e72356951)
+> Spice Route (65a602d7a37b675e72356953)
+> Sakura Sushi (65a602e0a37b675e72356955)
+> Dragon Palace (65a602e8a37b675e72356957)
+> Mediterraneo (65a60315a37b675e72356959)
+> Tandoori Flames (65a6031fa37b675e7235695b)
+
+DELETED data - retaining info here for records to test return message for non-existing data
+> Orchid Delights (65a60284a37b675e72356949) 
+> testsample (65a215b7860cf17450c159ca)
