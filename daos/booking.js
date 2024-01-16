@@ -6,12 +6,12 @@ const bookingSchema = new Schema(
     restaurant: {
       type: Schema.Types.ObjectId,
       ref: "Restaurant",
-      // required: true,
+      required: true,
     },
     // user: {
     //   type: Schema.Types.ObjectId,
     //   ref: "User",
-    //   required: true,
+    //  required: true,
     // },
     pax: {
       type: Number,

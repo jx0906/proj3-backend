@@ -23,11 +23,11 @@ router.get("/:id", bookingController.getOneById);
 // @access  Private (bearer token passed in header)
 router.post("/create", bookingController.createBooking);
 
+
 // @desc    Update a booking
 // @route   POST /booking/:id
 // @access  Private (bearer token passed in header)
 router.post("/:id", bookingController.updateBooking);
-
 
 // @desc    Delete a booking
 // @route   DELETE /booking/:id

@@ -18,7 +18,8 @@ function getAllByUserId(id) {
       },
       // user: id,
     })
-    .sort({ dateTime: 1 });
+    .sort({ dateTime: 1 })
+    .populate("restaurant");
 }
 
 // TODO:add restaurant id on arguments
@@ -55,7 +56,7 @@ function getAllByRestaurantId(id) {
 }
 
 function getOneById(id) {
-  return daoBooking.findById(id);
+  return daoBooking.findById(id).populate("restaurant");
 }
 
 function createBooking(booking) {

@@ -1,5 +1,5 @@
 const modelBooking = require("../models/booking");
-// const modelRestaurant = require("../models/restaurants");
+const modelRestaurant = require("../models/restaurant");
 
 module.exports = {
   getAllByUserId,
@@ -60,11 +60,12 @@ async function getOneById(req, res) {
 // @access  Private (bearer token passed in header)
 async function createBooking(req, res) {
   // const user = req.user._id;
-  // check if the restaurant exists
-  // const restaurant = await modelRestaurant.getOneById(req.body.restaurant);
-  // if (!restaurant) return res.status(404).json("no restaurant with such id");
-
   try {
+    // check if the restaurant exists
+    const restaurant = await modelRestaurant.getRestaurantById(
+      req.body.restaurant
+    );
+    if (!restaurant) return res.status(400).json("no restaurant with such id");
     const booking = await modelBooking.createBooking({
       ...req.body,
       // user,
@@ -79,11 +80,15 @@ async function createBooking(req, res) {
 // @route   POST /booking/:id
 // @access  Private
 async function updateBooking(req, res) {
-  const bookingByParams = await modelBooking.getOneById(req.params.id);
+  // const bookingByParams = await modelBooking.getOneById(req.params.id);
   // Check if the user who made the booking matches the token user
   // if (bookingByParams.user != req.user._id) {
   //   return res.status(401).json("Unauthorized");
   // }
+
+  if (req.body.restaurant) {
+    return res.status(400).json("restaurant cannot be updated");
+  }
 
   try {
     const booking = await modelBooking.updateBooking(req.params.id, req.body);
