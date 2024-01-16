@@ -3,6 +3,7 @@ const daoBooking = require("../daos/booking");
 module.exports = {
   getAllByUserId,
   getAllByRestaurantId,
+  filterAllByRestaurantId,
   getOneById,
   createBooking,
   updateBooking,
@@ -10,13 +11,48 @@ module.exports = {
 };
 
 function getAllByUserId(id) {
-  // return daoBooking.find({ user: id }).populate("restaurant");
-  return daoBooking.find({}).populate("restaurant");
+  return daoBooking
+    .find({
+      dateTime: {
+        $gte: new Date(),
+      },
+      // user: id,
+    })
+    .sort({ dateTime: 1 })
+    .populate("restaurant");
 }
 
+// TODO:add restaurant id on arguments
+function filterAllByRestaurantId({ startDateTime, endDateTime }) {
+  // return daoBooking
+  //   .find({
+  //     restaurant: id,
+  //     dateTime: {
+  //       $gte: new Date(startDateTime),
+  //       $lte: new Date(endDateTime),
+  //     },
+  //   })
+  //   .sort({ dateTime: 1 });
+
+  return daoBooking
+    .find({
+      dateTime: {
+        $gte: new Date(startDateTime),
+        $lte: new Date(endDateTime),
+      },
+    })
+    .sort({ dateTime: 1 });
+}
+
+// TODO:add restaurant id on arguments
 function getAllByRestaurantId(id) {
-  // return daoBooking.find({ restaurant: id });
-  return daoBooking.find({});
+  // return daoBooking
+  //   .find({
+  //     restaurant: id,
+  //   })
+  //   .sort({ dateTime: 1 });
+
+  return daoBooking.find({}).sort({ dateTime: 1 });
 }
 
 function getOneById(id) {
