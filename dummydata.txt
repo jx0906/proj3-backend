@@ -6,5 +6,6 @@ Dummy restaurant data
 > Royal Prata (id:65a278d1f5ae0f9372509411)
 > Hill Street Tai Hwa Pork Noodle (id:65a2a7a55662bde20513cf79)
 > Don Pies (id: 65a2a8a15662bde20513cf7b)
+> Tonkatsu King (id: 65a5f564b1cb74aeb1cbd7ac)
 Note:
 - all image, address and websiteURL info are real for FE rendering, if app
