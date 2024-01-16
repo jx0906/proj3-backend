@@ -60,16 +60,12 @@ async function getOneById(req, res) {
 // @access  Private (bearer token passed in header)
 async function createBooking(req, res) {
   // const user = req.user._id;
-  // check if the restaurant exists
-  // const restaurant = await modelRestaurant.getOneById(req.body.restaurant);
-  // if (!restaurant) return res.status(404).json("no restaurant with such id");
-
-  const restaurant = await modelRestaurant.getRestaurantById(
-    req.body.restaurant
-  );
-  if (!restaurant) return res.status(400).json("no restaurant with such id");
-
   try {
+    // check if the restaurant exists
+    const restaurant = await modelRestaurant.getRestaurantById(
+      req.body.restaurant
+    );
+    if (!restaurant) return res.status(400).json("no restaurant with such id");
     const booking = await modelBooking.createBooking({
       ...req.body,
       // user,
