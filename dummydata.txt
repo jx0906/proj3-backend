@@ -17,6 +17,9 @@ Dummy restaurant data (id in parenthesis)
 > Dragon Palace (65a602e8a37b675e72356957)
 > Mediterraneo (65a60315a37b675e72356959)
 > Tandoori Flames (65a6031fa37b675e7235695b)
+> Go West! (65a7a95c62474ec1a8470552)
+> Pho-ever (65a7c023dc89c7996cf95a41)
+> Mamma Mia (65a7ac0b62474ec1a8470554)
 
 DELETED data - retaining info here for records to test return message for non-existing data
 > Orchid Delights (65a60284a37b675e72356949) 
