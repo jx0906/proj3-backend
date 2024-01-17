@@ -66,13 +66,11 @@ const mailOptions = (obj) => {
 
 async function sendEmail(obj) {
   const mail = mailOptions(obj);
-
   const info = await transporter.sendMail({
     from: '"ChopeSeats" <noreply@chopeseats.com>',
     to: obj.payload.userEmail,
     subject: mail.subject,
     text: mail.text,
   });
-
   console.log(info);
 }
