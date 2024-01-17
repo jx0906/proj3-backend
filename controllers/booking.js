@@ -1,5 +1,6 @@
 const modelBooking = require("../models/booking");
 const modelRestaurant = require("../models/restaurant");
+const { sendEmail } = require("../util/sendEmail");
 
 module.exports = {
   getAllByUserId,
@@ -70,6 +71,17 @@ async function createBooking(req, res) {
       ...req.body,
       // user,
     });
+    await sendEmail({
+      type: "reservationCompleted",
+      payload: {
+        // TODO
+        userName: "Natsumi",
+        userEmail: "natsmy.1211@gmail.com",
+        pax: booking.pax,
+        restaurant: booking.restaurant.name,
+        dateTime: booking.dateTime,
+      },
+    });
     res.status(201).json(booking);
   } catch (err) {
     res.status(500).json({ errorMsg: err.message });
@@ -92,6 +104,17 @@ async function updateBooking(req, res) {
 
   try {
     const booking = await modelBooking.updateBooking(req.params.id, req.body);
+    await sendEmail({
+      type: "reservationChanged",
+      payload: {
+        // TODO
+        userName: "Natsumi",
+        userEmail: "natsmy.1211@gmail.com",
+        pax: booking.pax,
+        restaurant: booking.restaurant.name,
+        dateTime: booking.dateTime,
+      },
+    });
     res.status(200).json(booking);
   } catch (err) {
     res.status(500).json({ errorMsg: err.message });
@@ -110,7 +133,16 @@ async function deleteBooking(req, res) {
 
   try {
     const booking = await modelBooking.deleteBooking(req.params.id);
-    res.status(200).json("booking deleted");
+    await sendEmail({
+      type: "reservationCancelled",
+      payload: {
+        // TODO
+        userName: "Natsumi",
+        userEmail: "natsmy.1211@gmail.com",
+      },
+    });
+    // res.status(200).json("booking deleted");
+    res.status(200).json(booking);
   } catch (err) {
     res.status(500).json({ errorMsg: err.message });
   }
