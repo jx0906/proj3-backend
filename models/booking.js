@@ -59,12 +59,15 @@ function getOneById(id) {
   return daoBooking.findById(id).populate("restaurant");
 }
 
-function createBooking(booking) {
-  return daoBooking.create(booking);
+async function createBooking(booking) {
+  const createdBooking = await daoBooking.create(booking);
+  return await daoBooking.findById(createdBooking._id).populate("restaurant");
 }
 
 function updateBooking(id, booking) {
-  return daoBooking.findByIdAndUpdate(id, booking, { new: true });
+  return daoBooking
+    .findByIdAndUpdate(id, booking, { new: true })
+    .populate("restaurant");
 }
 
 function deleteBooking(id) {

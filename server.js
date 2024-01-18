@@ -3,17 +3,15 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
+require("dotenv").config();
 // import CORS
 var cors = require("cors");
-
+require("dotenv").config();
+require("./config/backend");
 var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
 var restaurantRouter = require("./routes/restaurant");
 var bookingRouter = require("./routes/booking");
-
-require("dotenv").config();
-require("./config/backend");
 
 var app = express();
 

@@ -1,5 +1,6 @@
 const modelBooking = require("../models/booking");
 const modelRestaurant = require("../models/restaurant");
+const { sendEmail } = require("../util/sendEmail");
 
 module.exports = {
   getAllByUserId,
@@ -59,6 +60,7 @@ async function getOneById(req, res) {
 // @route   POST /booking/create
 // @access  Private (bearer token passed in header)
 async function createBooking(req, res) {
+  let booking;
   // const user = req.user._id;
   try {
     // check if the restaurant exists
@@ -66,13 +68,28 @@ async function createBooking(req, res) {
       req.body.restaurant
     );
     if (!restaurant) return res.status(400).json("no restaurant with such id");
-    const booking = await modelBooking.createBooking({
+    booking = await modelBooking.createBooking({
       ...req.body,
       // user,
     });
     res.status(201).json(booking);
   } catch (err) {
     res.status(500).json({ errorMsg: err.message });
+  }
+
+  try {
+    await sendEmail({
+      type: "reservationCompleted",
+      payload: {
+        userName: "Username",
+        userEmail: process.env.EMAIL_USER,
+        pax: booking.pax,
+        restaurant: booking.restaurant.name,
+        dateTime: booking.dateTime,
+      },
+    });
+  } catch (emailError) {
+    console.error("Failed to send email:", emailError);
   }
 }
 
@@ -90,11 +107,29 @@ async function updateBooking(req, res) {
     return res.status(400).json("restaurant cannot be updated");
   }
 
+  let booking;
+
   try {
-    const booking = await modelBooking.updateBooking(req.params.id, req.body);
+    booking = await modelBooking.updateBooking(req.params.id, req.body);
     res.status(200).json(booking);
   } catch (err) {
     res.status(500).json({ errorMsg: err.message });
+  }
+
+  try {
+    await sendEmail({
+      type: "reservationChanged",
+      payload: {
+        // TODO
+        userName: "Username",
+        userEmail: process.env.EMAIL_USER,
+        pax: booking.pax,
+        restaurant: booking.restaurant.name,
+        dateTime: booking.dateTime,
+      },
+    });
+  } catch (emailError) {
+    console.error("Failed to send email:", emailError);
   }
 }
 
@@ -109,9 +144,22 @@ async function deleteBooking(req, res) {
   // }
 
   try {
-    const booking = await modelBooking.deleteBooking(req.params.id);
+    await modelBooking.deleteBooking(req.params.id);
     res.status(200).json("booking deleted");
   } catch (err) {
     res.status(500).json({ errorMsg: err.message });
+  }
+
+  try {
+    await sendEmail({
+      type: "reservationCancelled",
+      payload: {
+        // TODO
+        userName: "Username",
+        userEmail: process.env.EMAIL_USER,
+      },
+    });
+  } catch (emailError) {
+    console.error("Failed to send email:", emailError);
   }
 }
