@@ -20,6 +20,13 @@ Dummy restaurant data (id in parenthesis)
 > Go West! (65a7a95c62474ec1a8470552)
 > Pho-ever (65a7c023dc89c7996cf95a41)
 > Mamma Mia (65a7ac0b62474ec1a8470554)
+> Pho-ever (65a7c023dc89c7996cf95a41)
+> Bu Nan Specialities (65a7db37ddf191c5cd8258cb)
+> Kokoro (65a7e222323809649d4f6e5a)
+> Korean Tofu House (65a957af13e5cac86e302c04)
+> Uma Uma (65a95ab913e5cac86e302c06)
+> Spring Rollie (65a95c2813e5cac86e302c0a)
+> Aroydee (65a96c9162d7c6e5a951cf31)
 
 DELETED data - retaining info here for records to test return message for non-existing data
 > Orchid Delights (65a60284a37b675e72356949) 
