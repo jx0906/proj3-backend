@@ -24,6 +24,7 @@ const bookingSchema = new Schema(
     },
     request: {
       type: String,
+      maxlength: 100,
     },
   },
   {
