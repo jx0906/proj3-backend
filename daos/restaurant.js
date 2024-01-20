@@ -29,7 +29,6 @@ const restaurantSchema = new Schema(
     image: {
       // need this to be URL to facilitate FE rendering
       type: String,
-      required: false,
     },
     category: {
       type: String,
