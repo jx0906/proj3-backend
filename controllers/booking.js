@@ -1,6 +1,7 @@
 const modelBooking = require("../models/booking");
 const modelRestaurant = require("../models/restaurant");
 const { sendEmail } = require("../util/sendEmail");
+const dateTimeHandler = require("../util/datetime");
 
 module.exports = {
   getAllByUserId,
@@ -61,6 +62,8 @@ async function getOneById(req, res) {
 // @access  Private (bearer token passed in header)
 async function createBooking(req, res) {
   let booking;
+  const errors = [];
+
   // const user = req.user._id;
   try {
     // check if the restaurant exists
@@ -68,6 +71,13 @@ async function createBooking(req, res) {
       req.body.restaurant
     );
     if (!restaurant) return res.status(400).json("no restaurant with such id");
+
+    const validationErrors = validateInput(req.body, restaurant);
+    if (validationErrors) {
+      return res.status(400).json(validationErrors);
+    }
+
+    // If no errors, create booking
     booking = await modelBooking.createBooking({
       ...req.body,
       // user,
@@ -102,14 +112,25 @@ async function updateBooking(req, res) {
   // if (bookingByParams.user != req.user._id) {
   //   return res.status(401).json("Unauthorized");
   // }
-
-  if (req.body.restaurant) {
-    return res.status(400).json("restaurant cannot be updated");
-  }
-
+  
   let booking;
+  const errors = [];
 
   try {
+    if (req.body.restaurant) {
+      return res.status(400).json("restaurant cannot be updated");
+    }
+
+    const currBooking = await modelBooking.getOneById(req.params.id);
+    const restaurant = await modelRestaurant.getRestaurantById(
+      currBooking.restaurant._id
+    );
+    const validationErrors = validateInput(req.body, restaurant);
+    if (validationErrors) {
+      return res.status(400).json(validationErrors);
+    }
+
+    // If no errors, update booking
     booking = await modelBooking.updateBooking(req.params.id, req.body);
     res.status(200).json(booking);
   } catch (err) {
@@ -161,5 +182,47 @@ async function deleteBooking(req, res) {
     });
   } catch (emailError) {
     console.error("Failed to send email:", emailError);
+  }
+}
+
+function validateInput(body, restaurant) {
+  const errors = [];
+  console.log(body.dateTime);
+
+  // Pax
+  if (body.pax > restaurant.maxPax) {
+    errors.push("pax must be less than maxPax");
+  }
+  if (body.pax < 1) {
+    errors.push("pax must be more than 0");
+  }
+  if (body.pax > 10) {
+    errors.push("For large group, please contact the restaurant directly");
+  }
+  // DateTime
+  if (body.dateTime < new Date()) {
+    errors.push("dateTime must be in the future");
+  }
+  if (body.dateTime > new Date().setDate(new Date().getDate() + 14)) {
+    errors.push("dateTime must be within 14 days");
+  }
+  const isInputDayClosed = dateTimeHandler.isInputDayClosed(
+    restaurant.daysClose,
+    body.dateTime
+  );
+  if (isInputDayClosed) {
+    errors.push("restaurant is closed on this day");
+  }
+  const isInputTimeClosed = dateTimeHandler.isInputTimeClosed(
+    body.dateTime,
+    restaurant.timeOpen,
+    restaurant.timeClose
+  );
+  if (isInputTimeClosed) {
+    errors.push("restaurant is closed at this time");
+  }
+
+  if (errors.length > 0) {
+    return errors;
   }
 }
