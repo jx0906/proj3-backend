@@ -6,8 +6,24 @@ const Schema = mongoose.Schema;
 // const daoBooking = require('./booking');
 // const daoRestaurant = require('./restaurant');
 
-const schemaUser = new Schema(
-  {},
+const userSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    roleRest: {
+      type: Boolean,
+    }
+  },
   {
     // For mongoose to automatically create createdAt and updatedAt fields to every document
     timestamps: true,
@@ -15,4 +31,4 @@ const schemaUser = new Schema(
 );
 
 // Compile schema into model and export it
-module.exports = mongoose.model("User", schemaUser);
+module.exports = mongoose.model("User", userSchema);

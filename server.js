@@ -9,11 +9,9 @@ var cors = require("cors");
 require("dotenv").config();
 require("./config/backend");
 var indexRouter = require("./routes/index");
-var userRouter = require("./routes/user");
+var userRouter = require("./routes/account");
 var restaurantRouter = require("./routes/restaurant");
 var bookingRouter = require("./routes/booking");
-var accountRouter = require("./routes/account")
-
 var app = express();
 
 //mount middleware
@@ -26,10 +24,9 @@ app.use(cors());
 
 // mount routers
 app.use("/", indexRouter);
-app.use("/user", userRouter);
+app.use("/account", userRouter);
 app.use("/restaurant", restaurantRouter);
 app.use("/booking", bookingRouter);
-app.use("/account"), accountRouter
 
 // catch 404 and forward to error handler
 app.use(function (req, res) {

@@ -1,9 +1,11 @@
 var express = require("express");
 var router = express.Router();
+var indexController = require("../controllers/account")
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.json("Welcome to express");
 });
+
+// router.get("/signin", ());
 
 module.exports = router;
