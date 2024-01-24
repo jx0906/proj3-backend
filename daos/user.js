@@ -22,6 +22,14 @@ const userSchema = new Schema(
     },
     roleRest: {
       type: Boolean,
+    },
+    salt: {
+      type: String,
+      required: true,
+    },
+    iterations: {
+      type: Number,
+      required: true,
     }
   },
   {

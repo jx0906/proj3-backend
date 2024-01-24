@@ -5,6 +5,13 @@ module.exports = {
 };
 
 //basic function to post new account data into database
-function createUser(body) {
-    return daoUser.create(body);
+async function createUser(body) {
+    const user = await daoUser.findOne({"email": body.email})
+    // temporary if condition
+    if (user) {
+        return {success: false, error: "user already exist"};
+    }
+    // if condition not met, backend will proceed to POST new user
+    const newUser = await daoUser.create(body);
+    return {success:true, data: newUser};
 }
