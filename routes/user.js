@@ -1,9 +1,15 @@
-var express = require('express');
+var express = require("express");
+var userController = require("../controllers/user");
+var securityMiddleware = require("../middlewares/security");
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get("/login", userController.getLoginDetails);
+router.post("/login", userController.loginUser);
+router.post("/create", userController.createUser);
+router.post(
+  "/logout",
+  securityMiddleware.checkLogin,
+  userController.logoutUser
+);
 
 module.exports = router;
