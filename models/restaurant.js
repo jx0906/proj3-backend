@@ -7,6 +7,7 @@ module.exports = {
   createRestaurant,
   editRestaurant,
   deleteRestaurant,
+  getRestaurantByOwnerId,
 };
 
 //basic function to get all restaurant info
@@ -18,6 +19,11 @@ function getAllRestaurants(query) {
 
 async function getRestaurantById(param) {
   const data = await daoRestaurant.findOne({ _id: param });
+  return data;
+}
+
+async function getRestaurantByOwnerId(param) {
+  const data = await daoRestaurant.findOne({ owner: param });
   return data;
 }
 
