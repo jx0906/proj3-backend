@@ -24,7 +24,6 @@ async function getRestaurantById(param) {
 
 async function getRestaurantByOwnerId(param) {
   const data = await daoRestaurant.findOne({ owner: param });
-  console.log(`data: ${data}`);
   return data;
 }
 
