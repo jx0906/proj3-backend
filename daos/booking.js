@@ -8,11 +8,11 @@ const bookingSchema = new Schema(
       ref: "Restaurant",
       required: true,
     },
-    // user: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "User",
-    //  required: true,
-    // },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     pax: {
       type: Number,
       required: true,
