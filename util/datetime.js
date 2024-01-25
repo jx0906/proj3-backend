@@ -1,6 +1,8 @@
 const dayjs = require("dayjs");
 const isBetween = require("dayjs/plugin/isBetween");
+const utc = require("dayjs/plugin/utc");
 dayjs.extend(isBetween);
+dayjs.extend(utc);
 
 module.exports = {
   isInputDayClosed,
@@ -33,11 +35,15 @@ function isInputTimeClosed(inputDateTime, timeOpen, timeClose) {
   const formattedTimeClose = formatTime(timeClose);
   const [hourOpen, minuteOpen] = formattedTimeOpen.split(":").map(Number);
   const [hourClose, minuteClose] = formattedTimeClose.split(":").map(Number);
-  const dateTimeOpen = dayjs(inputDateTime).hour(hourOpen).minute(minuteOpen);
+
+  const dateTimeOpen = dayjs(inputDateTime)
+    .utcOffset(8 * 60)
+    .hour(hourOpen)
+    .minute(minuteOpen);
   const dateTimeClose = dayjs(inputDateTime)
+    .utcOffset(8 * 60)
     .hour(hourClose)
     .minute(minuteClose);
-
   return !dateTime.isBetween(dateTimeOpen, dateTimeClose);
 }
 
