@@ -6,10 +6,7 @@ var router = express.Router();
 router.get("/login", userController.getLoginDetails);
 router.post("/login", userController.loginUser);
 router.post("/create", userController.createUser);
-router.post(
-  "/logout",
-  securityMiddleware.checkLogin,
-  userController.logoutUser
-);
+router.post("/logout", userController.logoutUser);
+router.put("/:userId", userController.editUser);  // Use PUT for updating resources
 
 module.exports = router;

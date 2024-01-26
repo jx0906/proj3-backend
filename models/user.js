@@ -7,6 +7,8 @@ module.exports = {
   loginUser,
   createUser,
   logoutUser,
+  getUserById,
+  editUser
 };
 
 function getUsers(queryFields) {
@@ -84,4 +86,27 @@ async function logoutUser(body) {
     { token: null, expire_at: null }
   );
   return { success: true };
+}
+
+async function getUserById(param) {
+  const data = await daoUser.findOne({ _id: param });
+  return data ? { success: true, data: data } : { success: false, error: "User not found" };
+}
+
+async function editUser(req, res) {
+  const userData = await modelRestaurant.getUserById(req.params.Id);
+  if (!(userData.id === req.user.id)) {
+    return res.status(401).json("Unauthorized");
+  } else {
+    try {
+      const data = await modelUser.editUser(
+        req.params.Id,
+        req.body
+      );
+      res.json(data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ errorMsg: err.message });
+    }
+  }
 }
