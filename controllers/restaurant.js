@@ -61,7 +61,7 @@ async function createRestaurant(req, res) {
 
 async function editRestaurant(req, res) {
   const restdata = await modelRestaurant.getRestaurantById(req.params.restId);
-  if (!restdata.owner || restdata.owner !== req.user.id) {
+  if (!restdata.owner || restdata.owner != req.user.id) {
     return res.status(401).json("Unauthorized");
   } else {
     try {
@@ -79,7 +79,7 @@ async function editRestaurant(req, res) {
 
 async function deleteRestaurant(req, res) {
   const restdata = await modelRestaurant.getRestaurantById(req.params.restId);
-  if (!restdata.owner || restdata.owner !== req.user.id) {
+  if (!restdata.owner || restdata.owner != req.user.id) {
     return res.status(401).json("Unauthorized");
   } else {
     try {
