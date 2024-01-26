@@ -3,3 +3,5 @@ node_modules/
 .vscode/*
 !.vscode/extensions.json
 .env
+package-lock.json
+package.json
