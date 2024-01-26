@@ -33,7 +33,7 @@ https://front-end-ftue.onrender.com/
 * [Mantine form](https://mantine.dev/form/use-form/) -Form validation
 
 ### Other packeges used
-* [dayjs](https://www.npmjs.com/package/dayjs)
+* [dayjs](https://www.npmjs.com/package/dayjs) - Date formatting
 * [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 * [bcrypt](https://www.npmjs.com/package/bcrypt)
 * [Nodemailer](https://nodemailer.com/)
@@ -51,8 +51,9 @@ https://front-end-ftue.onrender.com/
 *
 
 ## Next Steps
-* Media upload implementation for restaurant profile
-* Enhancement for validation (Operation hours etc)
+* _Media upload implementation for restaurant profile_
+* Expansion of user permissions to allow restaurant owners and admins to manage restaurant
+* Enhancement for validation (Operation hours, phone number etc)
 
 ## References and Inspirations
 * [Chope](https://www.chope.co/singapore-restaurants) - UIUX of restaurant reservation app
