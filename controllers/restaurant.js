@@ -60,15 +60,20 @@ async function createRestaurant(req, res) {
 }
 
 async function editRestaurant(req, res) {
-  try {
-    const data = await modelRestaurant.editRestaurant(
-      req.params.restId,
-      req.body
-    );
-    res.json(data);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ errorMsg: err.message });
+  const restdata = await modelRestaurant.getRestaurantById(req.params.restId);
+  if (!restdata.owner || restdata.owner !== req.user.id) {
+    return res.status(401).json("Unauthorized");
+  } else {
+    try {
+      const data = await modelRestaurant.editRestaurant(
+        req.params.restId,
+        req.body
+      );
+      res.json(data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ errorMsg: err.message });
+    }
   }
 }
 
