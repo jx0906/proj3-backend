@@ -6,6 +6,8 @@ module.exports = {
   loginUser,
   logoutUser,
   createUser,
+  getUserById,
+  editUser
 };
 
 async function getUsers(req, res) {
@@ -70,5 +72,33 @@ async function logoutUser(req, res) {
   } catch (err) {
     console.log(err);
     res.status(500).json({ errorMsg: err.message });
+  }
+}
+
+async function getUserById(req, res) {
+  try {
+    const data = await modelUsers.getUserById(req.user.id);
+    res.json(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ errorMsg: err.message });
+  }
+}
+
+async function editUser(req, res) {
+  const userData = await modelRestaurant.getUserById(req.params.Id);
+  if (!userData.id != req.user.id) {
+    return res.status(401).json("Unauthorized");
+  } else {
+    try {
+      const data = await modelUser.editUser(
+        req.params.Id,
+        req.body
+      );
+      res.json(data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ errorMsg: err.message });
+    }
   }
 }
