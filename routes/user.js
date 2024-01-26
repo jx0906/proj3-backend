@@ -6,7 +6,6 @@ var router = express.Router();
 router.get("/login", userController.getLoginDetails);
 router.post("/login", userController.loginUser);
 router.post("/create", userController.createUser);
-router.get("/data", userController.getUsers);
 router.post(
   "/logout",
   securityMiddleware.checkLogin,
