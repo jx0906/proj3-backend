@@ -48,12 +48,12 @@ https://front-end-ftue.onrender.com/
 * [Frontend page structure](https://docs.google.com/spreadsheets/d/1TnCePLg6PgL4GXJ8U22dSM6ApNFd635rB7x1h6AjDYc/edit#gid=0)
 
 ## Key Challenges/takeaways
-*
+* Terminology? Testing of various workflows cos BE? 
 
 ## Next Steps
 * _Media upload implementation for restaurant profile_
-* Expansion of user permissions to allow restaurant owners and admins to manage restaurant
-* Enhancement for validation (Operation hours, phone number etc)
+* Enhance form validation rules (operation hours,  etc) and scope (eg, enable customisation of opening hours based on day of week)
+* Expand user permissions to allow multiple user accounts (eg, restaurant owners and admins) to manage restaurant info (eg, bookings)
 
 ## References and Inspirations
 * [Chope](https://www.chope.co/singapore-restaurants) - UIUX of restaurant reservation app
