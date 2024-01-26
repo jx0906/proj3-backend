@@ -36,7 +36,7 @@ router.post(
 // @access  Private (bearer token passed in header - to check if user is owner of restaurant)
 router.post(
   "/:restId/edit",
-  // securityMiddleware.checkIfOwner,
+  securityMiddleware.checkIfOwner,
   restaurantController.editRestaurant
 );
 
