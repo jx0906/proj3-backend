@@ -22,6 +22,11 @@ const Schema = mongoose.Schema;
 
 const restaurantSchema = new Schema(
   {
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -29,7 +34,6 @@ const restaurantSchema = new Schema(
     image: {
       // need this to be URL to facilitate FE rendering
       type: String,
-      required: false,
     },
     category: {
       type: String,

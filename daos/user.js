@@ -1,18 +1,44 @@
 const mongoose = require("mongoose");
-// optional shortcut to the mongoose.Schema class
 const Schema = mongoose.Schema;
 
-// import related daos (to facilitate retrieval of idUser in schemaUser and idBooking in schemaBooking)
-// const daoBooking = require('./booking');
-// const daoRestaurant = require('./restaurant');
-
-const schemaUser = new Schema(
-  {},
+const userSchema = new Schema(
   {
-    // For mongoose to automatically create createdAt and updatedAt fields to every document
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    salt: {
+      type: String,
+      required: true,
+    },
+    iterations: {
+      type: Number,
+      required: true,
+    },
+    token: {
+      type: String,
+    },
+    expire_at: {
+      type: Number,
+    },
+    isOwner: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+  },
+  {
     timestamps: true,
   }
 );
 
-// Compile schema into model and export it
-module.exports = mongoose.model("User", schemaUser);
+module.exports = mongoose.model("User", userSchema);
