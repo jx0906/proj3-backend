@@ -58,7 +58,12 @@ https://front-end-ftue.onrender.com/
 * [Frontend page structure](https://docs.google.com/spreadsheets/d/1TnCePLg6PgL4GXJ8U22dSM6ApNFd635rB7x1h6AjDYc/edit#gid=0)
 
 ## Key Challenges/takeaways
-* Terminology? Testing of various workflows cos BE? 
+*  The work on backend reminded me of Mark Twain's comment, "Data is like garbage. You’d better know what you are going to do with it before you collect it."
+*  Kickstarting the work with the design of the ERD and CRUD path indeed served us well in that aspect - it enabled us to establish a common understanding of the data we needed to capture backend, including the data linkages to establish, the data terminologies to go by and quite critically, the data types and validation rules to adhere by. With the two documents, the coding requirements (and thus BE development work) was pretty straightforward. Despite so, there are a few areas which, on hindsight, could have been better planned out, eg:
+*  Where should we place the validation logic?
+*  What are some common utility functions which we can develop one-off to standardise our data and time conversions for meaningful updating in the DB?
+*    
+*    
 
 ## Next Steps
 * Media upload implementation for restaurant profile
