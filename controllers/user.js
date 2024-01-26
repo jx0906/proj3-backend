@@ -10,7 +10,6 @@ module.exports = {
 
 async function getUsers(req, res) {
   try {
-    const userData = await modelUsers.getUsers(req.query);
     res.json({ users: userData });
   } catch (err) {
     res.status(500).json({ errorMsg: err.message });
