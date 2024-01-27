@@ -63,13 +63,7 @@ https://front-end-ftue.onrender.com/
 *  Where should we place the validation logic? Would it be better captured frontend or backend?
 *  What are some common utility functions which we can develop once-off to standardise our data and time conversions for meaningful updating in the DB?
 
-The questions would have been important to clarify if time wasn't a constraint as they could have helped us avoid the confusion we had at one point on the scope for backend/frontend development and the overall organisation of the code. This would be a useful takeaway for future full stack app development projects.
-
-That aside, to mitigate challenges with validation of date info, we also had the chance to explore new libraries like moment.js and dayjs. It was a refreshing and insightful experience to work with functional libraries as we had typically worked with UI libraries like Chakra. 
-
-(need to insert fav code segment here?)
-
-
+The questions would have been important to clarify if time wasn't a constraint as they could have helped us avoid the confusion we had at one point on the scope for backend/frontend development and the overall organisation of the code. This would be a useful takeaway for future full stack app development projects. That aside, to mitigate challenges with validation of date info, we also had the chance to explore new libraries like moment.js and dayjs. It was a refreshing and insightful experience to work with functional libraries as we had typically worked with UI libraries like Chakra. 
 
 ## Next Steps
 * Media upload implementation for restaurant profile
