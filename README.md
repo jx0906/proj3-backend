@@ -59,11 +59,17 @@ https://front-end-ftue.onrender.com/
 
 ## Key Challenges/takeaways
 *  The work on backend reminded me of Mark Twain's comment, "Data is like garbage. You’d better know what you are going to do with it before you collect it."
-*  Kickstarting the work with the design of the ERD and CRUD path indeed served us well in that aspect - it enabled us to establish a common understanding of the data we needed to capture backend, including the data linkages to establish, the data terminologies to go by and quite critically, the data types and validation rules to adhere by. With the two documents, the coding requirements (and thus BE development work) was pretty straightforward. Despite so, there are a few areas which, on hindsight, could have been better planned out, eg:
-*  Where should we place the validation logic?
-*  What are some common utility functions which we can develop one-off to standardise our data and time conversions for meaningful updating in the DB?
-*    
-*    
+*  Kickstarting the work with the design of the ERD and CRUD path indeed served us well in that aspect - it enabled us to establish a common understanding of the data we needed to capture backend, including the data linkages to establish, the data terminologies to go by, the data types and validation rules to adhere by. With the two documents, the coding requirements were clear so subsequent coding was generally straightforward. Despite so, there are a few areas which, on hindsight, could have been better planned out, eg:
+*  Where should we place the validation logic? Would it be better captured frontend or backend?
+*  What are some common utility functions which we can develop once-off to standardise our data and time conversions for meaningful updating in the DB?
+
+The questions would have been important to clarify if time wasn't a constraint as they could have helped us avoid the confusion we had at one point on the scope for backend/frontend development and the overall organisation of the code. This would be a useful takeaway for future full stack app development projects.
+
+That aside, to mitigate challenges with validation of date info, we also had the chance to explore new libraries like moment.js and dayjs. It was a refreshing and insightful experience to work with functional libraries as we had typically worked with UI libraries like Chakra. 
+
+(need to insert fav code segment here?)
+
+
 
 ## Next Steps
 * Media upload implementation for restaurant profile
